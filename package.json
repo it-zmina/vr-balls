@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js --mode production",
     "build-dev": "webpack --config webpack.config.js --mode development",
+    "start-https": "npx http-server -S -C cert.pem dist",
     "start": "npx serve dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
