@@ -41,7 +41,7 @@ Link: https://creodias.eu/-/how-to-open-ports-in-windows-
 
 ![](docs/step2-3.png)
 
-## Step 3: Add user interaction with a VR controllers
+## Step 3: Add user interaction with VR controllers
 
 -- Add `buildControllers()` method and invoke it from `setupVR()`
 ```
@@ -72,3 +72,10 @@ Link: https://creodias.eu/-/how-to-open-ports-in-windows-
   }
 ```
 ![](docs/step3-1.png)
+
+## Step 4: Add object selection with VR controllers
+
+- Add highlight object for indicating selected items
+  ![](docs/step4-1.png)
+- Highlight first object which intersect controller grip beam
+  ![](docs/step4-2.png)
