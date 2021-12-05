@@ -76,10 +76,21 @@ Link: https://creodias.eu/-/how-to-open-ports-in-windows-
 ## Step 4: Add object selection with VR controllers
 
 - Add highlight object for indicating selected items
+
   ![](docs/step4-1.png)
+
 - Highlight first object which intersect controller grip beam
+
   ![](docs/step4-2.png)
+
 - Add `handleController` method
+
   ![](docs/step4-3.png)
+
 - Extend `setupVR` method
+
   ![](docs/step4-4.png)
+
+- Extend `render` method
+
+  ![](docs/step4-5.png)
