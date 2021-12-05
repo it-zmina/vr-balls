@@ -79,3 +79,5 @@ Link: https://creodias.eu/-/how-to-open-ports-in-windows-
   ![](docs/step4-1.png)
 - Highlight first object which intersect controller grip beam
   ![](docs/step4-2.png)
+- Add `handleController` method
+  ![](docs/step4-3.png)
