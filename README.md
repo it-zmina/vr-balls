@@ -81,3 +81,5 @@ Link: https://creodias.eu/-/how-to-open-ports-in-windows-
   ![](docs/step4-2.png)
 - Add `handleController` method
   ![](docs/step4-3.png)
+- Extend `setupVR` method
+  ![](docs/step4-4.png)
