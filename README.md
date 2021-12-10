@@ -75,22 +75,43 @@ Link: https://creodias.eu/-/how-to-open-ports-in-windows-
 
 ## Step 4: Add object selection with VR controllers
 
-- Add highlight object for indicating selected items
+- In `initScene()` method add `highlight` field to the class for indicating selected items
+```
+    this.highlight = new THREE.Mesh ( geometry, new THREE.MeshBasicMaterial( {
+      color: 0xFFFFFF, side: THREE.BackSide }))
+    this.highlight.scale.set( 1.2, 1.2, 1.2)
+    this.scene.add( this.highlight )
+```
 
   ![](docs/step4-1.png)
 
-- Highlight first object which intersect controller grip beam
-
+- Add actions for press and release button on grip controller
   ![](docs/step4-2.png)
 
-- Add `handleController` method
+- In `handleController()` method highlight first object which intersect controller grip beam
+```
+    if (controller.userData.selectPressed) {
+      controller.children[0].scale.z = 10
+      this.workingMatrix.identity().extractRotation( controller.matrixWorld)
+
+      this.raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld)
+
+      this.raycaster.ray.direction.set(0, 0, -1).applyMatrix4(this.workingMatrix)
+
+      const intersects = this.raycaster.intersectObjects(this.room.children)
+
+      if (intersects.length > 0) {
+        intersects[0].object.add(this.highlight)
+        this.highlight.visible = true
+        controller.children[0].scale.z = intersects[0].distance
+      } else {
+        this.highlight.visible = false
+      }
+    }
+```
 
   ![](docs/step4-3.png)
 
-- Extend `setupVR` method
+- Each `render()` circle should invoke `handleController()` method for each grip
 
   ![](docs/step4-4.png)
-
-- Extend `render` method
-
-  ![](docs/step4-5.png)
