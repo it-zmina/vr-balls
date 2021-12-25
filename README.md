@@ -115,3 +115,60 @@ Link: https://creodias.eu/-/how-to-open-ports-in-windows-
 - Each `render()` circle should invoke `handleController()` method for each grip
 
   ![](docs/step4-4.png)
+
+## Step 5: Add custom controller
+
+In `setupVR` method add initializations for adding custom and standard controllers:
+```javascript
+  setupVR() {
+    this.renderer.xr.enabled = true
+    document.body.appendChild( VRButton.createButton( this.renderer ) )
+
+    let i = 0
+    this.flashLightController(i++)
+    this.buildStandardController(i++)
+  }
+
+  flashLightController(index) {
+    const self = this
+  
+    function onSelectStart() {
+      this.userData.selectPressed = true
+      if (self.spotlights[this.uuid]) {
+        self.spotlights[this.uuid].visible = true
+      } else {
+        this.children[0].scale.z = 10
+      }
+    }
+  
+    function onSelectEnd () {
+      self.highlight.visible = false
+      this.userData.selectPressed = false
+      if (self.spotlights[this.uuid]) {
+        self.spotlights[this.uuid].visible = false
+      } else {
+        this.children[0].scale.z = 0
+      }
+    }
+  
+    let controller = this.renderer.xr.getController(index)
+    controller.addEventListener( 'selectstart', onSelectStart );
+    controller.addEventListener( 'selectend', onSelectEnd );
+    controller.addEventListener( 'connected', function (event) {
+      self.buildFlashLightController.call(self, event.data, this)
+    })
+    controller.addEventListener( 'disconnected', function () {
+      while(this.children.length > 0) {
+        this.remove(this.children[0])
+        const controllerIndex = self.controllers.indexOf(this)
+        self.controllers[controllerIndex] = null
+      }
+    })
+    controller.handle = () => this.handleFlashLightController(controller)
+  
+    this.controllers[index] = controller
+    this.scene.add(controller)
+  }
+```
+
+  ![](docs/step5-1.png)
