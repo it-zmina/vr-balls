@@ -172,3 +172,10 @@ In `setupVR` method add initializations for adding custom and standard controlle
 ```
 
   ![](docs/step5-1.png)
+
+## Step 6: Add controller with dragging objects
+
+1. Create group with movable objects
+   ![](docs/step6-1.png)
+2. Build controller with dragging objects
+   ![](docs/step6-2.png)
